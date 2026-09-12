@@ -214,6 +214,18 @@ label input[type="number"] {
   width: 100%;
 }
 
+.slip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.slip-actions .go,
+.slip-actions .ghost {
+  width: auto;
+  flex: 1;
+}
+
 .go:disabled {
   background: #d7c7a1;
   cursor: default;
