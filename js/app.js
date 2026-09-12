@@ -148,14 +148,18 @@
       var left = Math.max(0, post.seats - post.joined);
       var label = went ? '看集合卡' : (mine ? '我发的' : (left ? '我去' : '人满了'));
       var disabled = !went && (mine || left === 0);
+      var extra = canCancel(post) ?
+        '<button type="button" class="ghost" data-cancel="' + post.id + '">取消应约</button>' : '';
       return '<article class="slip' + (post.crash ? ' is-overlap' : '') + (mine ? ' is-mine' : '') + '" style="--tilt:' + TILTS[index % TILTS.length] + '">' +
         '<span class="stamp">' + post.type + '</span>' +
         '<h3>' + escapeHtml(post.need) + '</h3>' +
         '<p class="meta">' + post.place + '<br>' + post.start + '–' + post.end +
         (post.crash ? '<br>和你的空闲撞上了' : '') +
         '<br>还缺 ' + left + ' 人 · 已有 ' + post.joined + ' 人应约</p>' +
+        '<div class="slip-actions">' +
         '<button type="button" class="go" data-id="' + post.id + '"' + (disabled ? ' disabled' : '') + '>' + label + '</button>' +
-        '</article>';
+        extra +
+        '</div></article>';
     }).join('');
   }
 
@@ -256,6 +260,11 @@
   }
 
   els.wall.addEventListener('click', function (event) {
+    var cancelBtn = event.target.closest('[data-cancel]');
+    if (cancelBtn) {
+      cancelJoin(cancelBtn.getAttribute('data-cancel'));
+      return;
+    }
     var btn = event.target.closest('[data-id]');
     if (!btn || btn.disabled) return;
     joinPost(btn.getAttribute('data-id'));
