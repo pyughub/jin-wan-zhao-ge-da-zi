@@ -1,21 +1,21 @@
 (function () {
   'use strict';
 
-  var STORAGE = 'buddy_wall_v1';
+  var STORAGE = 'buddy_wall_v2';
   var TYPES = ['自习', '跑步', '作业组队'];
   var PLACES = ['东中院', '图书馆', '霍英东', '南体', '电院', '一餐'];
   var CODES = ['咖啡', '灯管', '晚风', '闸机', '跑道', '占座', '热水', '操场灯'];
   var TILTS = ['-1.2deg', '0.8deg', '-0.4deg', '1.3deg', '0.2deg', '-1deg'];
 
   var SEEDS = [
-    { id: 's1', type: '作业组队', place: '东中院', start: '20:00', end: '21:30', seats: 1, joined: 1, need: '高数作业结对，带讲义第 2 节', owner: 'seed', code: '东中院-咖啡' },
-    { id: 's2', type: '跑步', place: '南体', start: '19:00', end: '20:00', seats: 2, joined: 0, need: '慢跑 3 公里，新手，别配速杀我', owner: 'seed', code: '南体-跑道' },
-    { id: 's3', type: '自习', place: '图书馆', start: '18:30', end: '21:00', seats: 1, joined: 2, need: '占一张四人桌，安静写英语朗读', owner: 'seed', code: '图书馆-灯管' },
-    { id: 's4', type: '作业组队', place: '电院', start: '19:30', end: '21:00', seats: 2, joined: 1, need: '码道微认证互相盯进度', owner: 'seed', code: '电院-闸机' },
-    { id: 's5', type: '自习', place: '东中院', start: '19:00', end: '21:00', seats: 1, joined: 0, need: '线代作业，卡题只写疑问', owner: 'seed', code: '东中院-占座' },
-    { id: 's6', type: '跑步', place: '霍英东', start: '21:00', end: '21:40', seats: 1, joined: 1, need: '泳馆门口拉伸，去不去都行', owner: 'seed', code: '霍英东-晚风' },
-    { id: 's7', type: '作业组队', place: '一餐', start: '18:00', end: '19:00', seats: 2, joined: 0, need: '学院问卷两个人一起填完', owner: 'seed', code: '一餐-热水' },
-    { id: 's8', type: '自习', place: '霍英东', start: '20:00', end: '22:00', seats: 1, joined: 0, need: '大厅沙发改简历，可低声讨论', owner: 'seed', code: '霍英东-操场灯' }
+    { id: 's1', type: '跑步', place: '南体', start: '07:30', end: '08:30', seats: 2, joined: 0, need: '晨跑 3 公里，新手，别配速杀我', owner: 'seed', code: '南体-跑道' },
+    { id: 's2', type: '自习', place: '图书馆', start: '09:00', end: '11:30', seats: 1, joined: 2, need: '占一张四人桌，上午写英语朗读', owner: 'seed', code: '图书馆-灯管' },
+    { id: 's3', type: '作业组队', place: '一餐', start: '12:00', end: '13:00', seats: 2, joined: 0, need: '午饭后把学院问卷一起填完', owner: 'seed', code: '一餐-热水' },
+    { id: 's4', type: '作业组队', place: '东中院', start: '14:00', end: '16:00', seats: 1, joined: 1, need: '高数作业结对，带讲义第 2 节', owner: 'seed', code: '东中院-咖啡' },
+    { id: 's5', type: '作业组队', place: '电院', start: '15:30', end: '17:00', seats: 2, joined: 1, need: '码道微认证互相盯进度', owner: 'seed', code: '电院-闸机' },
+    { id: 's6', type: '自习', place: '霍英东', start: '16:00', end: '18:00', seats: 1, joined: 0, need: '大厅沙发改简历，可低声讨论', owner: 'seed', code: '霍英东-操场灯' },
+    { id: 's7', type: '自习', place: '东中院', start: '19:00', end: '21:00', seats: 1, joined: 0, need: '线代作业，卡题只写疑问', owner: 'seed', code: '东中院-占座' },
+    { id: 's8', type: '跑步', place: '霍英东', start: '21:00', end: '21:40', seats: 1, joined: 1, need: '泳馆门口拉伸，去不去都行', owner: 'seed', code: '霍英东-晚风' }
   ];
 
   var els = {
