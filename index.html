@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
   <div class="night">
@@ -105,8 +105,9 @@
         <div><dt>今日口令</dt><dd id="meetCode"></dd></div>
         <div><dt>已应约</dt><dd id="meetCount"></dd></div>
       </dl>
-      <p class="meet-tip">到了以后对一口令。不用加好友，也不用定位。</p>
+      <p class="meet-tip" id="meetTip">到了以后对一口令。不用加好友，也不用定位。</p>
       <div class="sheet-actions">
+        <button type="button" class="ghost" id="cancelJoin" hidden>取消应约</button>
         <button type="button" class="ghost" id="copyCard">复制口令</button>
         <button type="button" class="primary" id="cardClose">收起</button>
       </div>
@@ -122,6 +123,6 @@
     <div id="mineList" class="mine-list"></div>
   </dialog>
 
-  <script src="js/app.js?v=7"></script>
+  <script src="js/app.js?v=8"></script>
 </body>
 </html>
