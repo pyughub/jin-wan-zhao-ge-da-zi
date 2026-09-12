@@ -145,7 +145,7 @@
         '<span class="stamp">' + post.type + '</span>' +
         '<h3>' + escapeHtml(post.need) + '</h3>' +
         '<p class="meta">' + post.place + '<br>' + post.start + '–' + post.end +
-        (post.crash ? '<br>和你今晚的空闲撞上了' : '') +
+        (post.crash ? '<br>和你的空闲撞上了' : '') +
         '<br>还缺 ' + left + ' 人 · 已有 ' + post.joined + ' 人应约</p>' +
         '<button type="button" class="go" data-id="' + post.id + '"' + (disabled ? ' disabled' : '') + '>' + label + '</button>' +
         '</article>';
