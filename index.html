@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今晚找个搭子</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="night">
+    <header class="mast">
+      <div>
+        <p class="seal">交大闵行 · 第一周晚上</p>
+        <h1>今晚找个搭子</h1>
+        <p class="lede">发一张条，撞上同路的人，见面时出示集合卡。</p>
+      </div>
+      <button type="button" class="ghost" id="mineBtn">我的集合</button>
+    </header>
+
+    <section class="freebar" id="freebar">
+      <label class="check">
+        <input type="checkbox" id="crashOn">
+        <span>今晚我有空</span>
+      </label>
+      <label class="when">
+        <span>从</span>
+        <input type="time" id="freeStart" value="19:00">
+      </label>
+      <label class="when">
+        <span>到</span>
+        <input type="time" id="freeEnd" value="21:00">
+      </label>
+      <p class="free-hint" id="freeHint">勾上以后，和你时间重叠的条子会亮起来、排到最前。</p>
+    </section>
+
+    <section class="filters" aria-label="筛选">
+      <div class="chips" id="typeChips"></div>
+      <div class="chips" id="placeChips"></div>
+    </section>
+
+    <div class="wall" id="wall"></div>
+    <p class="empty" id="empty" hidden>这面墙上没有符合的条子。换个筛选，或自己发一张。</p>
+
+    <button type="button" class="fab" id="postBtn">发一张条子</button>
+  </div>
+
+  <dialog class="sheet" id="postDialog">
+    <form id="postForm" method="dialog">
+      <h2>发一张条子</h2>
+      <p>写清缺什么人、在哪、几点。别人 10 秒能决定去不去。</p>
+      <label>类型
+        <select id="postType" required></select>
+      </label>
+      <label>地点
+        <select id="postPlace" required></select>
+      </label>
+      <div class="pair">
+        <label>开始
+          <input type="time" id="postStart" value="20:00" required>
+        </label>
+        <label>结束
+          <input type="time" id="postEnd" value="21:30" required>
+        </label>
+      </div>
+      <label>还缺几人
+        <input type="number" id="postSeats" min="1" max="8" value="1" required>
+      </label>
+      <label>一句话
+        <input type="text" id="postNeed" maxlength="42" placeholder="例如：高数作业结对，带讲义" required>
+      </label>
+      <div class="sheet-actions">
+        <button type="button" class="ghost" id="postCancel">取消</button>
+        <button type="submit" class="primary">贴上去</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet" id="cardDialog">
+    <article class="meet" id="meetCard">
+      <p class="meet-kicker">集合卡 · 见面出示</p>
+      <h2 id="meetNeed"></h2>
+      <dl>
+        <div><dt>地点</dt><dd id="meetPlace"></dd></div>
+        <div><dt>时间</dt><dd id="meetTime"></dd></div>
+        <div><dt>今日口令</dt><dd id="meetCode"></dd></div>
+        <div><dt>已应约</dt><dd id="meetCount"></dd></div>
+      </dl>
+      <p class="meet-tip">到了以后对一口令。不用加好友，也不用定位。</p>
+      <div class="sheet-actions">
+        <button type="button" class="ghost" id="copyCard">复制口令</button>
+        <button type="button" class="primary" id="cardClose">收起</button>
+      </div>
+    </article>
+  </dialog>
+
+  <dialog class="sheet" id="mineDialog">
+    <div class="mine-head">
+      <h2>我的集合</h2>
+      <button type="button" class="ghost" id="mineClose">关上</button>
+    </div>
+    <p class="mine-lead">你发过的，和你应过的。今晚出门前看一眼。</p>
+    <div id="mineList" class="mine-list"></div>
+  </dialog>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
