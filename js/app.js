@@ -46,6 +46,8 @@
     meetTime: document.getElementById('meetTime'),
     meetCode: document.getElementById('meetCode'),
     meetCount: document.getElementById('meetCount'),
+    meetTip: document.getElementById('meetTip'),
+    cancelJoin: document.getElementById('cancelJoin'),
     copyCard: document.getElementById('copyCard'),
     cardClose: document.getElementById('cardClose'),
     mineBtn: document.getElementById('mineBtn'),
@@ -176,6 +178,19 @@
     return place + '-' + CODES[Math.floor(Math.random() * CODES.length)];
   }
 
+  function nowMinutes() {
+    var d = new Date();
+    return d.getHours() * 60 + d.getMinutes();
+  }
+
+  function hasStarted(post) {
+    return nowMinutes() >= minutes(post.start);
+  }
+
+  function canCancel(post) {
+    return !!(post && state.joined[post.id] && post.owner !== 'me' && !hasStarted(post));
+  }
+
   function showCard(post) {
     state.viewing = post;
     els.meetNeed.textContent = post.need;
@@ -183,7 +198,27 @@
     els.meetTime.textContent = post.start + '–' + post.end;
     els.meetCode.textContent = post.code;
     els.meetCount.textContent = post.joined + ' 人';
+    var cancelable = canCancel(post);
+    els.cancelJoin.hidden = !cancelable;
+    if (state.joined[post.id] && hasStarted(post)) {
+      els.meetTip.textContent = '已经开始，不能取消。到了以后对一口令。';
+    } else if (cancelable) {
+      els.meetTip.textContent = '开始前可以取消应约。到了以后对一口令。';
+    } else {
+      els.meetTip.textContent = '到了以后对一口令。不用加好友，也不用定位。';
+    }
     if (!els.cardDialog.open) els.cardDialog.showModal();
+  }
+
+  function cancelJoin(id) {
+    var post = findPost(id);
+    if (!canCancel(post)) return;
+    if (post.joined > 0) post.joined -= 1;
+    delete state.joined[id];
+    save();
+    renderWall();
+    renderMine();
+    if (els.cardDialog.open) els.cardDialog.close();
   }
 
   function joinPost(id) {
@@ -212,9 +247,11 @@
     }
     els.mineList.innerHTML = mine.map(function (post) {
       var tag = post.owner === 'me' ? '我发的' : '我应过';
+      var extra = canCancel(post) ?
+        '<button type="button" class="ghost" data-cancel="' + post.id + '">取消应约</button>' : '';
       return '<div class="mine-item"><strong>' + escapeHtml(post.need) + '</strong>' +
         '<p class="meta">' + tag + ' · ' + post.place + ' · ' + post.start + '–' + post.end + ' · ' + post.code + '</p>' +
-        '<button type="button" class="go" data-open="' + post.id + '">看集合卡</button></div>';
+        '<div class="mine-item-actions"><button type="button" class="go" data-open="' + post.id + '">看集合卡</button>' + extra + '</div></div>';
     }).join('');
   }
 
@@ -256,6 +293,9 @@
   });
 
   els.cardClose.addEventListener('click', function () { els.cardDialog.close(); });
+  els.cancelJoin.addEventListener('click', function () {
+    if (state.viewing) cancelJoin(state.viewing.id);
+  });
   els.copyCard.addEventListener('click', function () {
     var post = state.viewing;
     if (!post) return;
@@ -274,6 +314,11 @@
   });
   els.mineClose.addEventListener('click', function () { els.mineDialog.close(); });
   els.mineList.addEventListener('click', function (event) {
+    var cancelBtn = event.target.closest('[data-cancel]');
+    if (cancelBtn) {
+      cancelJoin(cancelBtn.getAttribute('data-cancel'));
+      return;
+    }
     var btn = event.target.closest('[data-open]');
     if (!btn) return;
     var post = findPost(btn.getAttribute('data-open'));
