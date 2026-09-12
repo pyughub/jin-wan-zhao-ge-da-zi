@@ -113,6 +113,7 @@
   function visiblePosts() {
     var crash = els.crashOn.checked;
     var list = state.posts.filter(function (post) {
+      if (post.joined >= post.seats) return false;
       if (state.type && post.type !== state.type) return false;
       if (state.place && post.place !== state.place) return false;
       return true;
