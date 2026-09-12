@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
   <div class="night">
@@ -52,10 +52,27 @@
       <h2>我要发帖</h2>
       <p>写清缺什么人、在哪、几点。别人 10 秒能决定去不去。</p>
       <label>类型
-        <select id="postType" required></select>
+        <select id="postType" required>
+          <option value="自习">自习</option>
+          <option value="作业组队">作业组队</option>
+          <option value="约饭">约饭</option>
+          <option value="跑步">跑步</option>
+          <option value="健身">健身</option>
+          <option value="打球">打球</option>
+          <option value="逛校园">逛校园</option>
+          <option value="唱歌">唱歌</option>
+          <option value="桌游">桌游</option>
+        </select>
       </label>
       <label>地点
-        <select id="postPlace" required></select>
+        <select id="postPlace" required>
+          <option value="东中院">东中院</option>
+          <option value="图书馆">图书馆</option>
+          <option value="霍英东">霍英东</option>
+          <option value="南体">南体</option>
+          <option value="电院">电院</option>
+          <option value="一餐">一餐</option>
+        </select>
       </label>
       <div class="pair">
         <label>开始
@@ -105,6 +122,6 @@
     <div id="mineList" class="mine-list"></div>
   </dialog>
 
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=6"></script>
 </body>
 </html>
