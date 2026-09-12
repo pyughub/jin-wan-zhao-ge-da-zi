@@ -317,8 +317,15 @@ label input[type="number"] {
   background: #fffaf0;
 }
 
-.mine-item button {
+.mine-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 8px;
+}
+
+.mine-item-actions button {
+  margin-top: 0;
 }
 
 @media (max-width: 640px) {
